@@ -1,20 +1,33 @@
-import React from "react";
-import Home from "./Home";
-import Data from "./Data";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import RootLayouts from "./Layout/RootLayouts";
+
 const App = () => {
-  return (
-    <>
-      <div className="p-4">
-        {Data.map((categoryData, index) => (
-          <Home
-            key={index}
-            category={categoryData.category}
-            movies={categoryData.movies}
-          />
-        ))}
-      </div>
-    </>
-  );
+  const Routes = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayouts />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />,
+        },
+        {
+          path: "login",
+          element: <h2>login path</h2>,
+        },
+        {
+          path: "men",
+          element: <h2>men path</h2>,
+        },
+        {
+          path: "women",
+          element: <h2>women path</h2>,
+        },
+      ],
+    },
+  ]);
+  return <RouterProvider router={Routes} />;
 };
 
 export default App;
